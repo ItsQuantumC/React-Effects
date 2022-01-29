@@ -1,25 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useMemo } from 'react';
+import  useKeyDown from './Keydown';
 
-function App() {
+/*const CheckBox = () => {
+  const [val, setVal] = useState('');
+  const [phrase, setPhrase] = useState('example phrase');
+
+  const createPhrase = () => {
+    setPhrase(val);
+    setVal('');
+  };
+
+  useEffect(() => {
+    console.log(`typing '${val}'`);
+  },[val])
+
+  useEffect(() => {
+    console.log(`typing '${phrase}'`);
+  },[phrase]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <label>Fav Phrase</label>
+      <input value={val} placeholder={phrase} onChange={e => setVal(e.target.value)} />
+      <button onClick={createPhrase}>send</button>
+    </>
+  )
+}*/
+
+function WordCount({ children= ''}) {
+  useKeyDown();
+  const words = useMemo(() => children.split(' '), [children])
+  
+  useEffect(() => {
+    console.log('fresh render');
+  },[words]);
+
+  return (
+    <>
+      <p>{children}</p>
+      <p>
+        <strong>{words.length} - words</strong>
+      </p>
+    </>
+  )
+}
+
+const App =() => {
+  return <WordCount>You are not going to believe this but......</WordCount>
+
 }
 
 export default App;
